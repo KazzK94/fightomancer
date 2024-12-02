@@ -1,6 +1,4 @@
 
-// create phaser scene for menu (using class)
-
 export class LandingMenu extends Phaser.Scene {
 
 	constructor() {
@@ -56,12 +54,11 @@ export class LandingMenu extends Phaser.Scene {
 	addMonsterTween(monster: Phaser.GameObjects.Image, reversed: boolean = false) {
 		this.tweens.add({
 			targets: monster,
-			y: monster.y + (reversed ? -12 : 12),
+			y: monster.y + 15 * (reversed ? -1 : 1),
 			duration: 2000,
 			ease: 'Sine.easeInOut',
 			yoyo: true,
 			repeat: -1
 		})
 	}
-
 }
