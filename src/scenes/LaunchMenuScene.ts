@@ -1,5 +1,6 @@
 import { SCENE_KEYS } from '../config/sceneKeys'
 import { createMenuButton, addHighlightOnMenuButtonHover } from '../utils/menus'
+import { fadeInTransition, fadeOutTransition } from '../utils/transitions'
 
 export class LaunchMenuScene extends Phaser.Scene {
 
@@ -51,19 +52,27 @@ export class LaunchMenuScene extends Phaser.Scene {
 	showMenuOptions() {
 		// "New Game" button
 		this.createMainMenuButton(this.cameras.main.width - 100, 380, 'New Game', () => {
-			this.scene.start(SCENE_KEYS.MAIN_MENU)
+			fadeOutTransition(this, () => {
+				this.scene.start(SCENE_KEYS.MAIN_MENU)
+			})
 		})
 
 		// "Options" button
 		this.createMainMenuButton(this.cameras.main.width - 100, 450, 'Options', () => {
-			// this.scene.start(SCENE_KEYS.OPTIONS)
-			alert('Options not implemented yet')
+			fadeOutTransition(this, () => {
+				// this.scene.start(SCENE_KEYS.OPTIONS)
+				alert('Options not implemented yet')
+				fadeInTransition(this)
+			})
 		})
 
 		// "Credits" button
 		this.createMainMenuButton(this.cameras.main.width - 100, 520, 'Credits', () => {
-			// this.scene.start(SCENE_KEYS.CREDITS)
-			alert('Credits not implemented yet')
+			fadeOutTransition(this, () => {
+				// this.scene.start(SCENE_KEYS.CRE DITS)
+				alert('Credits not implemented yet')
+				fadeInTransition(this)
+			})
 		})
 	}
 
