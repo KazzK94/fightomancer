@@ -23,8 +23,6 @@ export class LaunchMenuScene extends Phaser.Scene {
 			color: '#f44',
 			fontFamily: 'knight-warrior',
 			shadow: {
-				offsetX: 0,
-				offsetY: 0,
 				color: '#000',
 				blur: 6,
 				fill: true
