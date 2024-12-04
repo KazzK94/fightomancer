@@ -28,6 +28,7 @@ export class MainMenuScene extends Phaser.Scene {
 			{
 				text: 'Fight',
 				icon: 'fightIcon',
+				color: 0xee6666,
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						this.scene.start(SCENE_KEYS.FIGHT)
@@ -35,18 +36,9 @@ export class MainMenuScene extends Phaser.Scene {
 				}
 			},
 			{
-				text: 'Shop',
-				icon: 'shopIcon',
-				onClick: () => {
-					fadeOutTransition(this, () => {
-						console.log('Shop clicked')
-						fadeInTransition(this)
-					})
-				}
-			},
-			{
 				text: 'Team',
 				icon: 'teamIcon',
+				color: 0x77dd77,
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						console.log('Team clicked')
@@ -55,8 +47,20 @@ export class MainMenuScene extends Phaser.Scene {
 				}
 			},
 			{
+				text: 'Shop',
+				icon: 'shopIcon',
+				color: 0x7777dd,
+				onClick: () => {
+					fadeOutTransition(this, () => {
+						console.log('Shop clicked')
+						fadeInTransition(this)
+					})
+				}
+			},
+			{
 				text: 'Settings',
 				icon: 'settingsIcon',
+				color: 0xbbbbbb,
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						console.log('Settings clicked')
@@ -71,18 +75,17 @@ export class MainMenuScene extends Phaser.Scene {
 		})
 	}
 
-	createButton(button: { text: string, icon: string, onClick: () => void }, index: number) {
+	createButton(button: { text: string, icon: string, color?: number, onClick: () => void }, index: number) {
 
-		const MARGIN_TOP = 40 // Margin from top of the screen (in px)
-		const MARGIN_LEFT = 30 // Margin from left of the screen (in px)
+		const MARGIN_TOP = 25 // Margin from top of the screen (in px)
+		const MARGIN_LEFT = 25 // Margin from left of the screen (in px)
 		const PADDING_LEFT = 30 // Padding from the left of the button (in px)
-		const BUTTON_GAP_Y = 25 // Space between the menu buttons (in px)
+		const BUTTON_GAP_Y = 20 // Space between the menu buttons (in px)
 		const ICON_GAP_X = 40 // Gap between icon and text
 		const BUTTON_WIDTH = 500
-		const BUTTON_HEIGHT = 100
+		const BUTTON_HEIGHT = 120
 
-		const BACKGROUND_COLOR = 0xbb9966
-		const BACKGROUND_COLOR_HOVER = 0xeecc77
+		const BACKGROUND_COLOR = button.color || 0xeecc77
 
 		// Position of the button (Origin: Top Left)
 		const BUTTON_X = MARGIN_LEFT
@@ -120,7 +123,7 @@ export class MainMenuScene extends Phaser.Scene {
 		container.setInteractive({ useHandCursor: true })
 		container.on('pointerover', () => {
 			buttonBackground.clear()
-			buttonBackground.fillStyle(BACKGROUND_COLOR_HOVER, 0.8)
+			buttonBackground.fillStyle(BACKGROUND_COLOR, 1)
 			buttonBackground.fillRoundedRect(-BUTTON_WIDTH / 2, -BUTTON_HEIGHT / 2, BUTTON_WIDTH, BUTTON_HEIGHT, 20)
 		})
 		container.on('pointerout', () => {
