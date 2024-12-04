@@ -9,10 +9,6 @@ export class LaunchMenuScene extends Phaser.Scene {
 	}
 
 	create() {
-
-		// TODO: REMOVE THIS LINE:
-		this.scene.start(SCENE_KEYS.MAIN_MENU)
-
 		// Background (positioned from bottom left)
 		this.add.image(0, this.cameras.main.height, 'background').setOrigin(0, 1).setDepth(-10)
 
