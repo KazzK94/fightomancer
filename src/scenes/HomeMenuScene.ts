@@ -92,7 +92,7 @@ export class MainMenuScene extends Phaser.Scene {
 		const container = this.add.container(BUTTON_X + BUTTON_WIDTH / 2, BUTTON_Y + BUTTON_HEIGHT / 2)
 		container.setSize(BUTTON_WIDTH, BUTTON_HEIGHT)
 
-		/* IMPORTANT NOTE: All coordinates of items inside a container are relative to the container position */
+		/* IMPORTANT NOTE: All coordinates of items inside a container are relative to the container position (origin is 0.5) */
 
 		// Button Background
 		const buttonBackground = this.add.graphics()
