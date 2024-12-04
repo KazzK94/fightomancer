@@ -1,6 +1,6 @@
 
 import { SCENE_KEYS } from '../config/sceneKeys'
-import { fadeOutTransition } from '../utils/transitions'
+import { fadeInTransition, fadeOutTransition } from '../utils/transitions'
 
 // Padding Y: 50px
 // Space between buttons: 30px
@@ -50,6 +50,7 @@ export class MainMenuScene extends Phaser.Scene {
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						console.log('Shop clicked')
+						fadeInTransition(this)
 					})
 				}
 			},
@@ -59,6 +60,7 @@ export class MainMenuScene extends Phaser.Scene {
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						console.log('Team clicked')
+						fadeInTransition(this)
 					})
 				}
 			},
@@ -68,6 +70,7 @@ export class MainMenuScene extends Phaser.Scene {
 				onClick: () => {
 					fadeOutTransition(this, () => {
 						console.log('Settings clicked')
+						fadeInTransition(this)
 					})
 				}
 			}
@@ -132,6 +135,8 @@ export class MainMenuScene extends Phaser.Scene {
 			buttonBackground.fillStyle(0xddaa66, 0.6)
 			buttonBackground.fillRoundedRect(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT, 20)
 		})
+
+		container.on('pointerdown', button.onClick)
 
 		this.input.enableDebug(container)
 	}
