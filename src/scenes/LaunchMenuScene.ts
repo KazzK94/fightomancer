@@ -1,6 +1,6 @@
 import { SCENE_KEYS } from '../config/sceneKeys'
 import { createMenuButton, addHighlightOnMenuButtonHover } from '../utils/menus'
-import { fadeInTransition, fadeOutTransition } from '../utils/transitions'
+import { fadeOutTransition } from '../utils/transitions'
 
 export class LaunchMenuScene extends Phaser.Scene {
 
@@ -17,6 +17,10 @@ export class LaunchMenuScene extends Phaser.Scene {
 	}
 
 	create() {
+
+		// TODO: REMOVE THIS LINE:
+		this.scene.start(SCENE_KEYS.MAIN_MENU)
+
 		// Background (positioned from bottom left)
 		this.add.image(0, this.cameras.main.height, 'background').setOrigin(0, 1).setDepth(-10)
 
@@ -51,32 +55,29 @@ export class LaunchMenuScene extends Phaser.Scene {
 
 	showMenuOptions() {
 		// "New Game" button
-		this.createMainMenuButton(this.cameras.main.width - 100, 380, 'New Game', () => {
+		this.createLaunchMenuButton(this.cameras.main.width - 100, 380, 'Start Game', () => {
 			fadeOutTransition(this, () => {
 				this.scene.start(SCENE_KEYS.MAIN_MENU)
 			})
 		})
 
 		// "Options" button
-		this.createMainMenuButton(this.cameras.main.width - 100, 450, 'Options', () => {
+		this.createLaunchMenuButton(this.cameras.main.width - 100, 450, 'Options', () => {
 			fadeOutTransition(this, () => {
-				// this.scene.start(SCENE_KEYS.OPTIONS)
-				alert('Options not implemented yet')
-				fadeInTransition(this)
+				this.scene.start(SCENE_KEYS.OPTIONS)
+				alert('Options not implemented yet, press F5 to restart the game')
 			})
 		})
 
 		// "Credits" button
-		this.createMainMenuButton(this.cameras.main.width - 100, 520, 'Credits', () => {
+		this.createLaunchMenuButton(this.cameras.main.width - 100, 520, 'Credits', () => {
 			fadeOutTransition(this, () => {
-				// this.scene.start(SCENE_KEYS.CRE DITS)
-				alert('Credits not implemented yet')
-				fadeInTransition(this)
+				this.scene.start(SCENE_KEYS.CREDITS)
 			})
 		})
 	}
 
-	createMainMenuButton(x: number, y: number, text: string, onClick: () => void) {
+	createLaunchMenuButton(x: number, y: number, text: string, onClick: () => void) {
 		const menuButton = createMenuButton(this, x, y, text, {
 			fontSize: '56px',
 			color: '#fff'

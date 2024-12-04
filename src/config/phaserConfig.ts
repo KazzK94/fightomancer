@@ -1,6 +1,8 @@
 
 import { LaunchMenuScene } from '../scenes/LaunchMenuScene'
 import { MainMenuScene } from '../scenes/HomeMenuScene'
+import { FightScene } from '../scenes/FightScene'
+import { CreditsScene } from '../scenes/CreditsScene'
 
 // Game Initialization
 export const phaserConfig: Phaser.Types.Core.GameConfig = {
@@ -8,7 +10,7 @@ export const phaserConfig: Phaser.Types.Core.GameConfig = {
 	width: 800,
 	height: 600,
 	parent: 'game',
-	backgroundColor: '#900',
+	backgroundColor: '#555',
 	physics: {
 		default: 'arcade',
 		arcade: {
@@ -24,6 +26,8 @@ export const phaserConfig: Phaser.Types.Core.GameConfig = {
 	},
 	scene: [
 		LaunchMenuScene,
-		MainMenuScene
+		MainMenuScene,
+		FightScene,
+		CreditsScene
 	]
 }
