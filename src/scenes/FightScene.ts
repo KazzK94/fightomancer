@@ -1,5 +1,6 @@
 
 import { SCENE_KEYS } from '../config/sceneKeys'
+import { fadeInTransition } from '../utils/transitions'
 
 export class FightScene extends Phaser.Scene {
 
@@ -7,15 +8,8 @@ export class FightScene extends Phaser.Scene {
 		super(SCENE_KEYS.FIGHT)
 	}
 
-	preload() {
-		// Background
-		this.load.image('background', 'images/backgrounds/bg-desert.jpg')
-		// Monsters
-		this.load.image('scalekin', 'images/fightomancers/scalekin.png')
-		this.load.image('raichunt', 'images/fightomancers/raichunt.png')
-	}
-
 	create() {
+		fadeInTransition(this)
 		// Background (positioned from bottom left)
 		this.add.image(0, this.cameras.main.height, 'background').setOrigin(0, 1).setDepth(-10)
 

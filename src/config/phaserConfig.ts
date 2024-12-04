@@ -1,4 +1,5 @@
 
+import { PreloadScene } from '../scenes/PreloadScene'
 import { LaunchMenuScene } from '../scenes/LaunchMenuScene'
 import { MainMenuScene } from '../scenes/HomeMenuScene'
 import { FightScene } from '../scenes/FightScene'
@@ -25,6 +26,7 @@ export const phaserConfig: Phaser.Types.Core.GameConfig = {
 		autoCenter: Phaser.Scale.Center.CENTER_BOTH
 	},
 	scene: [
+		PreloadScene,
 		LaunchMenuScene,
 		MainMenuScene,
 		FightScene,

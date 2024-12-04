@@ -8,14 +8,6 @@ export class LaunchMenuScene extends Phaser.Scene {
 		super(SCENE_KEYS.LAUNCH_MENU)
 	}
 
-	preload() {
-		// Monsters
-		this.load.image('monster1', 'images/fightomancers/green-monster-gamer.png')
-		this.load.image('monster2', 'images/fightomancers/dragon.webp')
-		// Background
-		this.load.image('background', 'images/backgrounds/bg-desert.jpg')
-	}
-
 	create() {
 
 		// TODO: REMOVE THIS LINE:
