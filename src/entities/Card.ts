@@ -19,16 +19,13 @@ export class Card extends Phaser.GameObjects.Rectangle {
 		scene.add.existing(this)
 		this.setOrigin(0)
 		this.cardData = cardData
-		this.create(scene, x, y)
-		this.animate(scene)
-	}
-
-	create(scene: Phaser.Scene, x: number, y: number) {
+		
 		this.createTitle(x, y, this.cardData.name)
 		this.createDamageAndCost(x, y)
 		this.on('pointerdown', () => {
 			alert('card clicked')
 		})
+		this.animate(scene)
 	}
 
 	createTitle(x: number, y: number, title: string) {

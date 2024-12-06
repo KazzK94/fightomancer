@@ -62,7 +62,7 @@ export class Creature extends Phaser.GameObjects.GameObject {
 	}
 
 	/** Deals damage to the creature. Returns an object: { isAlive: boolean }. */
-	takeDamage({ damage, element, ailment }: TakeDamageProps) {
+	takeDamage({ damage/*, element, ailment */}: TakeDamageProps) {
 		this.health -= damage
 		if (this.healthBar) {
 			this.healthBar.update(this.health / this.creature.health)
