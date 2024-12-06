@@ -12,18 +12,9 @@ export const phaserConfig: Phaser.Types.Core.GameConfig = {
 	height: 600,
 	parent: 'game',
 	backgroundColor: '#555',
-	physics: {
-		default: 'arcade',
-		arcade: {
-			debug: false
-		}
-	},
-	input: {
-		gamepad: true
-	},
 	scale: {
-		mode: Phaser.Scale.ScaleModes.FIT,
-		autoCenter: Phaser.Scale.Center.CENTER_BOTH
+		mode: Phaser.Scale.FIT,
+		autoCenter: Phaser.Scale.CENTER_BOTH
 	},
 	scene: [
 		PreloadScene,

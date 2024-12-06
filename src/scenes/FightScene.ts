@@ -1,17 +1,13 @@
 
 import { SCENE_KEYS } from '../config/sceneKeys'
-import { ActionBar } from '../ui/ActionBar'
-import { Card } from '../ui/Card'
+import { CREATURES } from '../data/creatures'
+import { Player } from '../entities/Player'
 import { HealthBar } from '../ui/HealthBar'
 import { fadeInTransition } from '../utils/transitions'
 
 export class FightScene extends Phaser.Scene {
 
-	private playerHealth: number = 100
-	private playerHealthBar!: HealthBar
-	private playerActionCharge: number = 0
-	private playerActionBar!: ActionBar
-	private playerActions: number = 0
+	private player!: Player
 
 	private enemyHealth: number = 100
 	private enemyHealthBar!: HealthBar
@@ -27,30 +23,25 @@ export class FightScene extends Phaser.Scene {
 
 		this.showPlayer()
 		this.showEnemy()
+
+		// Test damage randomly
+		this.input.on('pointerdown', () => {
+			this.player.takeDamage({ damage: Phaser.Math.Between(4, 20), element: 'earth' })
+		})
 	}
 
 	update(): void {
-		this.playerHealth -= 0.005
-		this.playerHealthBar.update(this.playerHealth)
-		this.playerActionCharge += 0.1
-		if (this.playerActionCharge > 100) {
-			this.playerActionCharge = 0
-			this.playerActions = Phaser.Math.MaxAdd(this.playerActions, 1, 19)
-		}
-		this.playerActionBar.update(this.playerActionCharge, this.playerActions)
-		this.enemyHealth -= 0.015
-		this.enemyHealthBar.update(this.enemyHealth)
+		this.player.update()
+		this.enemyHealthBar.update(this.enemyHealth / 100)
 	}
 
 	showPlayer() {
-		this.createMonster(160, 460, 'scalekin', true)
-		this.playerHealthBar = new HealthBar(this, 320, 360)
-		this.playerActionBar = new ActionBar(this, 320, 395)
-		for (let i = 0; i < 3; i++) {
-			const cardX = 325 + i * 135
-			const cardY = 435
-			new Card(this, cardX, cardY)
-		}
+		this.player = new Player({
+			scene: this,
+			x: 150,
+			y: 460,
+			creatureData: CREATURES.SCALEKIN
+		})
 	}
 
 	showEnemy() {

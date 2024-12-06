@@ -6,19 +6,20 @@ export class HealthBar extends Phaser.GameObjects.GameObject {
 	private width: number = 400
 	private height: number = 35
 
-	constructor(scene: Phaser.Scene, x: number, y: number, healthPercent = 100) {
+	constructor(scene: Phaser.Scene, x: number, y: number, healthProportion = 1) {
 		super(scene, 'HealthBar')
 		this.bar = scene.add.graphics()
 		this.x = x
 		this.y = y
-		this.draw(healthPercent)
+		this.draw(healthProportion)
 	}
 
-	update(healthPercent: number): void {
-		this.draw(healthPercent)
+	/** Updates the HealthBar with given proportion of fill (healthProportion value must be a number between 0 and 1) */
+	update(healthProportion: number): void {
+		this.draw(healthProportion)
 	}
 
-	private draw(healthPercent: number): void {
+	private draw(healthProportion: number): void {
 		this.bar.clear()
 
 		// Draw background
@@ -26,10 +27,10 @@ export class HealthBar extends Phaser.GameObjects.GameObject {
 		this.bar.fillRect(this.x, this.y, this.width, this.height)
 
 		// Draw health
-		const healthWidth = Math.max(Math.floor(this.width * (healthPercent / 100)), 0)
-		if (healthPercent > 60) {
+		const healthWidth = Math.max(Math.floor(this.width * healthProportion), 0)
+		if (healthProportion > 0.6) {
 			this.bar.fillStyle(0x00ff00, 1)
-		} else if (healthPercent > 30) {
+		} else if (healthProportion > 0.3) {
 			this.bar.fillStyle(0xffff00, 1)
 		} else {
 			this.bar.fillStyle(0xff0000, 1)

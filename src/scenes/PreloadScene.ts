@@ -21,8 +21,8 @@ export class PreloadScene extends Phaser.Scene {
 
 	create() {
 		// TODO: Change debug line:
-		// this.scene.start(SCENE_KEYS.FIGHT) // <-- Debug line
-		this.scene.start(SCENE_KEYS.LAUNCH_MENU)
+		this.scene.start(SCENE_KEYS.FIGHT) // <-- Debug line
+		//this.scene.start(SCENE_KEYS.LAUNCH_MENU)
 	}
 
 }
