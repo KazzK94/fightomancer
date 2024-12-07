@@ -2,6 +2,7 @@
 import { SCENE_KEYS } from '../config/sceneKeys'
 import { CREATURES } from '../data/creatures'
 import { Player } from '../entities/Player'
+import { CardData } from '../types'
 import { HealthBar } from '../ui/HealthBar'
 import { fadeInTransition } from '../utils/transitions'
 
@@ -11,6 +12,7 @@ export class FightScene extends Phaser.Scene {
 
 	private enemyHealth: number = 100
 	private enemyHealthBar!: HealthBar
+	private enemySprite!: Phaser.GameObjects.Image
 
 	constructor() {
 		super(SCENE_KEYS.FIGHT)
@@ -24,10 +26,7 @@ export class FightScene extends Phaser.Scene {
 		this.showPlayer()
 		this.showEnemy()
 
-		// Test damage randomly
-		this.input.on('pointerdown', () => {
-			this.player.takeDamage({ damage: Phaser.Math.Between(4, 20), element: 'earth' })
-		})
+		this.events.addListener('cardClick', this.handleCardClick, this)
 	}
 
 	update(): void {
@@ -45,7 +44,7 @@ export class FightScene extends Phaser.Scene {
 	}
 
 	showEnemy() {
-		this.createMonster(620, 160, 'raichunt', false)
+		this.enemySprite = this.createMonster(620, 160, 'raichunt', false)
 		this.enemyHealthBar = new HealthBar(this, 60, 60)
 	}
 
@@ -57,16 +56,29 @@ export class FightScene extends Phaser.Scene {
 			monster.flipX = true
 		}
 
-		this.tweens.add({
-			targets: monster,
-			y: monster.y + 5 * (isPlayer ? -1 : 1),
-			duration: 2000,
-			ease: 'Sine.easeInOut',
-			yoyo: true,
-			repeat: -1
-		})
-
 		return monster
+	}
+
+	handleCardClick(cardData: CardData) {
+		// Use actions (exit if not enough actions)
+		if (!this.player.useActions(cardData.cost)) return
+		// Shake on big amounts of damage
+		this.cameras.main.shake(200, 0.0005 * cardData.damage)
+		// and apply damage to enemy
+		this.enemyHealth = Phaser.Math.MinSub(this.enemyHealth, cardData.damage, 0)
+		// Check if enemy is dead
+		if (this.enemyHealth === 0) {
+			this.events.removeListener('cardClick', this.handleCardClick, this)
+			this.tweens.add({
+				targets: this.enemySprite,
+				scale: 0,
+				alpha: 0,
+				duration: 500,
+				onComplete: () => {
+					this.time.delayedCall(500, () => alert('¡FELICIDADES!'))
+				}
+			})
+		}
 	}
 
 }

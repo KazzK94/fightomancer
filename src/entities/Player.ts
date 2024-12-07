@@ -18,7 +18,7 @@ export class Player extends Creature {
 		// Update HealthBar Info
 		this.healthBar?.update(this.health / this.creature.health)
 		// Charge Action Gauge
-		this.actionCharge += this.creature.stats.speed * 0.01
+		this.actionCharge += this.creature.stats.speed * 0.03
 		if (this.actionCharge > 100) {
 			this.actionCharge = 0
 			this.actions = Phaser.Math.MaxAdd(this.actions, 1, 19)

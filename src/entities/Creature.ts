@@ -61,6 +61,15 @@ export class Creature extends Phaser.GameObjects.GameObject {
 		this.actionBar = new ActionBar(this.scene, this.avatar.x + 150, this.avatar.y - this.avatar.height / 2 + 10 + 35)
 	}
 
+	useActions(amount: number) {
+		if (this.actions < amount) {
+			console.warn('Not enough actions!')
+			return false
+		}
+		this.actions -= amount
+		return true
+	}
+
 	/** Deals damage to the creature. Returns an object: { isAlive: boolean }. */
 	takeDamage({ damage/*, element, ailment */}: TakeDamageProps) {
 		this.health -= damage

@@ -22,10 +22,12 @@ export class Card extends Phaser.GameObjects.Rectangle {
 		
 		this.createTitle(x, y, this.cardData.name)
 		this.createDamageAndCost(x, y)
+		this.slideIn(scene)
+
+		this.setInteractive({ useHandCursor: true })
 		this.on('pointerdown', () => {
-			alert('card clicked')
+			this.scene.events.emit('cardClick', this.cardData)
 		})
-		this.animate(scene)
 	}
 
 	createTitle(x: number, y: number, title: string) {
@@ -66,7 +68,7 @@ export class Card extends Phaser.GameObjects.Rectangle {
 		this.costText.setOrigin(0, 0.5)
 	}
 
-	animate(scene: Phaser.Scene) {
+	slideIn(scene: Phaser.Scene) {
 		scene.tweens.add({
 			targets: [this, this.titleText, this.damageIcon, this.damageText, this.costIcon, this.costText],
 			x: "-=500",
