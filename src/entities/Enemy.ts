@@ -1,25 +1,21 @@
 
 import type { CreatureData } from '../types'
-import { CARDS } from '../data/cards'
 
-import { Card } from './Card'
 import { Creature } from './Creature'
 
-interface PlayerConstructorProps {
+interface EnemyConstructorProps {
 	scene: Phaser.Scene
 	x: number
 	y: number
 	creatureData: CreatureData
 }
 
-export class Player extends Creature {
-	// Player's Data
-	private cards: Card[] = []
+export class Enemy extends Creature {
 
-	constructor({ scene, x, y, creatureData }: PlayerConstructorProps) {
-		super({ scene, position: { avatar: { x, y }, healthBar: { x: x + 150, y: y - (256 / 2) + 10 } }, creatureData })
+	constructor({ scene, x, y, creatureData }: EnemyConstructorProps) {
+		super({ scene, position: { avatar: { x: x + 480, y }, healthBar: { x: x - 90, y: y - (256 / 2) + 20 } }, creatureData })
 		this.creatureData = creatureData
-		this.createCards()
+		this.avatar.flipX = true
 	}
 
 	update() {
@@ -36,12 +32,4 @@ export class Player extends Creature {
 		this.actionBar?.update(this.actionCharge, this.actions)
 	}
 
-	createCards() {
-		for (let i = 0;i < 3;i++) {
-			const cardX = 305 + i * 135
-			const cardY = 420
-			const card = new Card(this.scene, cardX, cardY, CARDS[i + 1])
-			this.cards.push(card)
-		}
-	}
 }

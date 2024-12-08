@@ -1,13 +1,12 @@
 
 import type { CardData } from '../types'
-import { ELEMENTS } from './elements'
 
 export const CARDS: CardData[] = [
 	{
 		name: 'Fireball',
 		description: 'Throw a magic fireball.',
 		texture: 'cardFireball',
-		element: ELEMENTS.FIRE,
+		element: 'fire',
 		damageType: 'magic',
 		damage: 20,
 		cost: 6
@@ -16,7 +15,7 @@ export const CARDS: CardData[] = [
 		name: 'Tackle',
 		description: 'Tackle your enemy.',
 		texture: 'cardTackle',
-		element: ELEMENTS.NEUTRAL,
+		element: 'neutral',
 		damageType: 'physical',
 		damage: 5,
 		cost: 1
@@ -25,7 +24,7 @@ export const CARDS: CardData[] = [
 		name: 'Slash',
 		description: 'Slash your enemy.',
 		texture: 'cardSlash',
-		element: ELEMENTS.NEUTRAL,
+		element: 'neutral',
 		damageType: 'physical',
 		damage: 12,
 		cost: 2
@@ -34,7 +33,7 @@ export const CARDS: CardData[] = [
 		name: 'Rock Throw',
 		description: 'Throw a rock. 20% chance to remove an action from the enemy.',
 		texture: 'cardRockThrow',
-		element: ELEMENTS.EARTH,
+		element: 'earth',
 		damageType: 'physical',
 		ailment: {
 			type: 'stun',
@@ -54,7 +53,7 @@ export const CARDS: CardData[] = [
 		name: 'Thunderbolt',
 		description: 'Discharge a magic thunderbolt. 15% chance to stun.',
 		texture: 'cardThunderbolt',
-		element: ELEMENTS.THUNDER,
+		element: 'thunder',
 		damageType: 'magic',
 		ailment: {
 			type: 'stun',

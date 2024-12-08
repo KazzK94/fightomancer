@@ -1,21 +1,17 @@
 
-import { ELEMENTS } from './data/elements'
-
-export type Element = keyof ELEMENTS
+// type Element must be any of the values from the ELEMENTS object
+export type Element = 'neutral' | 'fire' | 'water' | 'thunder' | 'earth' | 'wind' | 'light' | 'dark'
+export type Ailment = 'stun' | 'slow' | 'burn' | 'confusion'
 
 export interface CreatureData {
+	name: string
 	health: number
-	texture: string
 	element: Element
+	texture: string
 	stats: CreatureStats
 	// TODO: affinity (can be positive/strong or negative/weak)
 	// elements: [ { element: Element, value: number }, ... ]
 	// ailments: [ { ailment: Ailment, value: number }, ... ]
-}
-
-export interface CreatureFightData extends CreatureData {
-	actions: number
-	actionCharge: number
 }
 
 export interface CreatureStats {
@@ -24,6 +20,11 @@ export interface CreatureStats {
 	magic: number
 	resistance: number
 	speed: number
+}
+
+export interface CreatureFightData extends CreatureData {
+	actions: number
+	actionCharge: number
 }
 
 export interface CardData {
@@ -47,7 +48,6 @@ interface CardEffectParams {
 	target?: CreatureFightData
 }
 
-export type Ailment = 'stun' | 'slow' | 'burn' | 'confusion'
 
 /*
 	Stun: Action Bar doesn't fill for certain amount of time

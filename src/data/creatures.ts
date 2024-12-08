@@ -1,10 +1,15 @@
-import { ELEMENTS } from './elements'
 
-export const CREATURES = Object.freeze({
+import { CreatureData } from '../types'
+
+interface CreaturesType {
+	[key: string]: CreatureData
+}
+
+export const CREATURES : CreaturesType = Object.freeze({
 	SCALEKIN: {
 		name: 'Scalekin',
 		health: 160,
-		element: ELEMENTS.EARTH,
+		element: 'earth',
 		texture: 'scalekin',
 		stats: {
 			attack: 20,
@@ -16,8 +21,8 @@ export const CREATURES = Object.freeze({
 	},
 	RAICHUNT: {
 		name: 'Raichunt',
-		element: ELEMENTS.THUNDER,
 		health: 120,
+		element: 'thunder',
 		texture: 'raichunt',
 		stats: {
 			attack: 12,

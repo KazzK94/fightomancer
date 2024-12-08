@@ -5,15 +5,26 @@ import { HealthBar } from '../ui/HealthBar'
 
 export interface CreatureConstructorProps {
 	scene: Phaser.Scene
-	x: number
-	y: number
+	position: {
+		avatar: {
+			x: number
+			y: number
+		}
+		healthBar: {
+			x: number
+			y: number
+		}
+	}
 	creatureData: CreatureData
 }
 
 interface TakeDamageProps {
 	damage: number
 	element: string
-	ailment?: string
+	ailment?: {
+		type: string
+		chance: number
+	}
 }
 
 /** A class representing any Creature. Needs to be extended from every creature in the game. */
@@ -23,42 +34,43 @@ export class Creature extends Phaser.GameObjects.GameObject {
 	protected actionCharge: number = 0
 	protected actions: number = 0
 	// Creature's UI
-	private avatar!: Phaser.GameObjects.Image
+	protected avatar!: Phaser.GameObjects.Image
 	protected healthBar?: HealthBar
 	protected actionBar?: ActionBar
 	// Creature's Data
-	protected creature!: CreatureData
+	protected creatureData!: CreatureData
 
-	constructor({ scene, x, y, creatureData }: CreatureConstructorProps) {
+	constructor({ scene, position, creatureData }: CreatureConstructorProps) {
 		super(scene, 'Creature')
-		this.avatar = scene.add.image(x, y, creatureData.texture)
 		scene.add.existing(this)
-		this.init(creatureData)
+		this.init({ position, creatureData })
 	}
 
-	init(creatureData: CreatureData) {
-		this.creature = creatureData
+	init({ position, creatureData }: Omit<CreatureConstructorProps, 'scene'>) {
+		this.avatar = this.scene.add.image(position.avatar.x, position.avatar.y, creatureData.texture)
+		this.creatureData = creatureData
 		this.health = creatureData.health
-		this.createHealthBar()
-		this.createActionBar()
+		this.createHealthBar(position.healthBar)
+		this.createActionBar({ ...position.healthBar, y: position.healthBar.y + 35 })
 	}
 
 	update() {
 		if (this.healthBar) {
-			this.healthBar.update(this.health / this.creature.health)
+			this.healthBar.update(this.health / this.creatureData.health)
 		}
 		if (this.actionBar) {
 			this.actionBar.update(this.actionCharge, this.actions)
 		}
 	}
 
-	createHealthBar() {
-		// this.playerHealthBar = new HealthBar(this, 320, 360)
-		this.healthBar = new HealthBar(this.scene, this.avatar.x + 150, this.avatar.y - this.avatar.height / 2 + 10)
+	createHealthBar({ x, y }: { x: number, y: number }) {
+		// this.healthBar = new HealthBar(this.scene, this.avatar.x + 150, this.avatar.y - this.avatar.height / 2 + 10)
+		this.healthBar = new HealthBar(this.scene, x, y)
 	}
 
-	createActionBar() {
-		this.actionBar = new ActionBar(this.scene, this.avatar.x + 150, this.avatar.y - this.avatar.height / 2 + 10 + 35)
+	createActionBar({ x, y }: { x: number, y: number }) {
+		// this.actionBar = new ActionBar(this.scene, this.avatar.x + 150, this.avatar.y - this.avatar.height / 2 + 10 + 35)
+		this.actionBar = new ActionBar(this.scene, x, y)
 	}
 
 	useActions(amount: number) {
@@ -71,10 +83,10 @@ export class Creature extends Phaser.GameObjects.GameObject {
 	}
 
 	/** Deals damage to the creature. Returns an object: { isAlive: boolean }. */
-	takeDamage({ damage/*, element, ailment */}: TakeDamageProps) {
+	takeDamage({ damage/*, element, ailment */ }: TakeDamageProps) {
 		this.health -= damage
 		if (this.healthBar) {
-			this.healthBar.update(this.health / this.creature.health)
+			this.healthBar.update(this.health / this.creatureData.health)
 		}
 
 		const blinkTintColor = 0xddaaaa
@@ -91,6 +103,6 @@ export class Creature extends Phaser.GameObjects.GameObject {
 			this.avatar.clearTint()
 		})
 
-		return { isAlive: (this.health <= 0) }
+		return { isAlive: (this.health > 0) }
 	}
 }
