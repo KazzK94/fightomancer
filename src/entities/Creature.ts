@@ -112,7 +112,7 @@ export class Creature extends Phaser.GameObjects.GameObject {
 			targets: this.avatar,
 			scale: 0,
 			alpha: 0,
-			duration: 1000,
+			duration: 1500,
 			onComplete
 		})
 	}

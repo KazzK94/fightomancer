@@ -76,9 +76,14 @@ export class FightScene extends Phaser.Scene {
 		if (!isAlive) {
 			this.events.removeListener('cardClick', this.handleCardClick, this)
 			this.enemy.kill(() => {
-				this.bgm.stop()
-				this.time.delayedCall(300, () => {
-					this.scene.start(SCENE_KEYS.VICTORY)
+				this.tweens.add({
+					targets: this.bgm,
+					volume: 0,
+					duration: 1500,
+					onComplete: () => {
+						this.bgm.stop()
+						this.scene.start(SCENE_KEYS.VICTORY)
+					}
 				})
 			})
 		}
