@@ -41,4 +41,8 @@ export class HealthBar extends Phaser.GameObjects.GameObject {
 		this.bar.lineStyle(2, 0x222222)
 		this.bar.strokeRect(this.x, this.y, this.width, this.height)
 	}
+
+	clear() {
+		this.bar.clear()
+	}
 }

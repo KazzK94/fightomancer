@@ -17,7 +17,7 @@ export const CARDS: CardData[] = [
 		texture: 'cardTackle',
 		element: 'neutral',
 		damageType: 'physical',
-		damage: 5,
+		damage: 7,
 		cost: 1
 	},
 	{
@@ -26,7 +26,7 @@ export const CARDS: CardData[] = [
 		texture: 'cardSlash',
 		element: 'neutral',
 		damageType: 'physical',
-		damage: 12,
+		damage: 16,
 		cost: 2
 	},
 	{
@@ -39,7 +39,7 @@ export const CARDS: CardData[] = [
 			type: 'stun',
 			chance: 0.2
 		},
-		damage: 25,
+		damage: 35,
 		effect: ({ target }) => {
 			if(!target) throw new Error('CRITICAL ERROR: No target defined in Rock Throw effect.')
 			if (Math.random() <= 0.2) {

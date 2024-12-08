@@ -42,7 +42,6 @@ export class Card extends Phaser.GameObjects.Rectangle {
 	}
 
 	createDamageAndCost(x: number, y: number) {
-
 		const { damage, cost } = this.cardData
 
 		// Damage Icon:

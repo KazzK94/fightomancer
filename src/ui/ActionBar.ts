@@ -35,12 +35,15 @@ export class ActionBar extends Phaser.GameObjects.GameObject {
 		this.bar.strokeRect(this.x, this.y, this.width, this.height)
 
 		// Draw action count
-		for(let i = 0; i < actions; i++) {
+		for (let i = 0;i < actions;i++) {
 			this.bar.fillStyle(0x4499ff)
 			this.bar.fillCircle(this.x + 20 + i * 20, this.y + 22, 6)
 			this.bar.lineStyle(1, 0x2277bb)
 			this.bar.strokeCircle(this.x + 20 + i * 20, this.y + 22, 6)
 		}
-		
+	}
+
+	clear() {
+		this.bar.clear()
 	}
 }

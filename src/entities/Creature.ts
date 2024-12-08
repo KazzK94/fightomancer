@@ -55,6 +55,7 @@ export class Creature extends Phaser.GameObjects.GameObject {
 	}
 
 	update() {
+		if (this.health <= 0) return
 		if (this.healthBar) {
 			this.healthBar.update(this.health / this.creatureData.health)
 		}
@@ -104,5 +105,15 @@ export class Creature extends Phaser.GameObjects.GameObject {
 		})
 
 		return { isAlive: (this.health > 0) }
+	}
+
+	kill(onComplete: () => void) {
+		this.scene.tweens.add({
+			targets: this.avatar,
+			scale: 0,
+			alpha: 0,
+			duration: 1000,
+			onComplete
+		})
 	}
 }

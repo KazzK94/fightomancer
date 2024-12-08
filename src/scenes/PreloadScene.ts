@@ -17,12 +17,15 @@ export class PreloadScene extends Phaser.Scene {
 		this.load.image('monster2', 'images/fightomancers/dragon.webp')
 		this.load.image('scalekin', 'images/fightomancers/scalekin.png')
 		this.load.image('raichunt', 'images/fightomancers/raichunt.png')
+		// Sound
+		this.load.audio('battleTheme', 'audio/battle-theme.mp3')
+		this.load.audio('victoryFanfare', 'audio/ffxii-victory.mp3')
 	}
 
 	create() {
 		// TODO: Change debug line:
-		this.scene.start(SCENE_KEYS.FIGHT) // <-- Debug line
-		//this.scene.start(SCENE_KEYS.LAUNCH_MENU)
+		//this.scene.start(SCENE_KEYS.FIGHT) // <-- Debug line
+		this.scene.start(SCENE_KEYS.LAUNCH_MENU)
 	}
 
 }

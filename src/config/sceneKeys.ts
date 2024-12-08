@@ -6,4 +6,5 @@ export const SCENE_KEYS = {
 	FIGHT: 'FightScene',
 	OPTIONS: 'OptionsScene',
 	CREDITS: 'CreditsScene',
+	VICTORY: 'VictoryScene'
 }

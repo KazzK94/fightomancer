@@ -21,7 +21,7 @@ export const CREATURES : CreaturesType = Object.freeze({
 	},
 	RAICHUNT: {
 		name: 'Raichunt',
-		health: 120,
+		health: 100,
 		element: 'thunder',
 		texture: 'raichunt',
 		stats: {

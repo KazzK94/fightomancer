@@ -11,8 +11,7 @@ export class FightScene extends Phaser.Scene {
 	private player!: Player
 	private enemy!: Enemy
 
-	private enemyHealth: number = 100
-	private enemySprite!: Phaser.GameObjects.Image
+	private bgm!: Phaser.Sound.BaseSound
 
 	constructor() {
 		super(SCENE_KEYS.FIGHT)
@@ -25,6 +24,9 @@ export class FightScene extends Phaser.Scene {
 
 		this.showPlayer()
 		this.showEnemy()
+
+		this.bgm = this.sound.add('battleTheme', { loop: true, volume: 0.5 })
+		this.bgm.play()
 
 		this.events.addListener('cardClick', this.handleCardClick, this)
 	}
@@ -67,20 +69,17 @@ export class FightScene extends Phaser.Scene {
 		// Use actions (exit if not enough actions)
 		if (!this.player.useActions(cardData.cost)) return
 		// Shake on big amounts of damage
-		this.cameras.main.shake(200, 0.0005 * cardData.damage)
+		this.cameras.main.shake(100 + Math.max(6 * cardData.damage, 300), 0.0006 * cardData.damage)
 		// and apply damage to enemy
-		const {isAlive} = this.enemy.takeDamage(cardData)
+		const { isAlive } = this.enemy.takeDamage(cardData)
 		// Check if enemy is dead
 		if (!isAlive) {
 			this.events.removeListener('cardClick', this.handleCardClick, this)
-			this.tweens.add({
-				targets: this.enemy,
-				scale: 0,
-				alpha: 0,
-				duration: 500,
-				onComplete: () => {
-					this.time.delayedCall(500, () => alert('¡FELICIDADES!'))
-				}
+			this.enemy.kill(() => {
+				this.bgm.stop()
+				this.time.delayedCall(300, () => {
+					this.scene.start(SCENE_KEYS.VICTORY)
+				})
 			})
 		}
 	}

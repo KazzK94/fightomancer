@@ -4,6 +4,7 @@ import { LaunchMenuScene } from '../scenes/LaunchMenuScene'
 import { MainMenuScene } from '../scenes/HomeMenuScene'
 import { FightScene } from '../scenes/FightScene'
 import { CreditsScene } from '../scenes/CreditsScene'
+import { VictoryScene } from '../scenes/VictoryScene'
 
 // Game Initialization
 export const phaserConfig: Phaser.Types.Core.GameConfig = {
@@ -21,6 +22,7 @@ export const phaserConfig: Phaser.Types.Core.GameConfig = {
 		LaunchMenuScene,
 		MainMenuScene,
 		FightScene,
-		CreditsScene
+		CreditsScene,
+		VictoryScene
 	]
 }

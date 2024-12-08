@@ -20,6 +20,7 @@ export class Enemy extends Creature {
 
 	update() {
 		super.update()
+		if(this.health <= 0) return
 		// Update HealthBar Info
 		this.healthBar?.update(this.health / this.creatureData.health)
 		// Charge Action Gauge
